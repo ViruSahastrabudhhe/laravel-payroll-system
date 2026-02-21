@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Scopes\EmployeeScope;
+use App\Models\Department;
+use App\Models\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,4 +32,11 @@ class Employee extends Model
         'user_id',
     ];
 
+    public function department() {
+        return $this->hasOne(Department::class, 'id', 'department_id');
+    }
+
+    public function position() {
+        return $this->hasOne(Position::class, 'id', 'position_id');
+    }
 }

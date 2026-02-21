@@ -26,13 +26,15 @@
             <tr>
                 <td>{{ $employee->id }}</td>
                 <td>{{ $employee->first_name }} {{ $employee->last_name }}</td>
-                <td>{{ $employee->position_id }}</td>
-                <td>{{ $employee->department_id }}</td>
+                <td>{{ $employee->position->title }}</td>
+                <td>{{ $employee->department->name }}</td>
                 <td>{{ $employee->salary }}</td>
                 <td>{{ $employee->employment_type }}</td>
                 <td>{{ $employee->is_active }}</td>
                 <td>
-                    <button>Edit</button>
+                    <a href="{{ route('employees.edit', $employee) }}">
+                        <button>Edit</button>
+                    </a>
                     <form action="{{ route('employees.destroy', $employee) }}" method='post'>
                         @csrf
                         @method('DELETE')

@@ -57,7 +57,16 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $positions = Position::all();
+        $departments = Department::all();
+
+        return view('employee.edit', 
+            [
+                'employee' => $employee,
+                'positions' => $positions,
+                'departments' => $departments,
+            ]
+        );
     }
 
     /**
@@ -65,7 +74,11 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        $data = $request->validated();
+
+        $employee->update($data);
+
+        return redirect()->route('employees.index')->with('success', __('employee.success_editing'));
     }
 
     /**

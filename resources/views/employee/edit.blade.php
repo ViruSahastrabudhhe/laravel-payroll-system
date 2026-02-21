@@ -1,3 +1,45 @@
+@extends('layouts.app')
+
+@section('content')
 <div>
-    <!-- Waste no more time arguing what a good man should be, be one. - Marcus Aurelius -->
+    <a href="{{ route('employees.index') }}">Back to Employees</a>
 </div>
+
+<div>
+    <form action="{{ route('employees.update', $employee) }}" method='post'>
+        @csrf
+        @method('put')
+        First name: <input type="text" name="first_name" required value="{{ $employee->first_name }}"> <br>
+        Last name: <input type="text" name="last_name" required value="{{ $employee->last_name }}"> <br>
+        Gender: <input type="text" name="gender" required value="{{ $employee->gender }}"> <br>
+        Email: <input type="email" name="email" required value="{{ $employee->email }}"> <br>
+        Birth date: <input type="date" name="date_of_birth" required value="{{ $employee->date_of_birth }}"> <br>
+        Address: <input type="text" name="address" required value="{{ $employee->address }}"> <br>
+        Contact number: <input type="text" name="phone_number" required value="{{ $employee->phone_number }}"> <br>
+        Position: <select name="position_id" id="position" required value="{{ $employee->position_id }}">
+                <option value="">Select position</option>
+                <option value="{{ $employee->position_id }}" selected>{{ $employee->position->title }}</option>
+                <option value="" disabled>-----</option>
+            @foreach($positions as $position)
+                <option value="{{ $position->id }}">{{ $position->title }}</option>
+            @endforeach
+        </select> <br>
+        Department: <select name="department_id" id="departments" required>
+                <option value="">Select department</option>
+                <option value="{{ $employee->department_id }}" selected>{{ $employee->department->name }}</option>
+                <option value="" disabled>-----</option>
+            @foreach($departments as $department)
+                <option value="{{ $department->id }}">{{ $department->name }}</option>
+            @endforeach
+        </select> <br>
+        Salary grade: <input type="text" name="salary" required value="{{ $employee->salary }}"> <br>
+        Employment type: <input type="text" name="employment_type" required value="{{ $employee->employment_type }}"> <br>
+        Active: <select name="is_active" id="is_active" required value="{{ $employee->is_active }}">
+            <option value="1" default>Active</option>
+            <option value="0">Inactive</option>
+        </select> <br>
+        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+        <input type="submit" value="Edit Employee">
+    </form>
+</div>
+@endsection
