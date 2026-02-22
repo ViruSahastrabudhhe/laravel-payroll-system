@@ -12,6 +12,7 @@
         <thead>
             <tr>
                 <th>Deduction name</th>
+                <th>Deduction rate</th>
                 <th>Description</th>
                 <th>Action</th>
             </tr>
@@ -20,6 +21,7 @@
             @forelse($deductions as $deduction)
                 <tr>
                     <td>{{ $deduction->deduction }}</td>
+                    <td>{{ $deduction->rate * 100 }}%</td>
                     <td>{{ $deduction->description }}</td>
                     <td>
                         <a href="{{ route('deductions.edit', $deduction) }}">

@@ -33,7 +33,13 @@
             @endforeach
         </select> <br>
         Salary grade: <input type="text" name="salary" required value="{{ $employee->salary }}"> <br>
-        Employment type: <input type="text" name="employment_type" required value="{{ $employee->employment_type }}"> <br>
+        Employment Type: <select name="employment_type" id="employment_type" required>
+            <option value="{{ $employee->employment_type }}" selected>{{ $employee->employment_type }}</option>
+            <option value="" disabled>-----</option>
+            @foreach($employmentTypes as $type)
+            <option value="{{ $type->value }}">{{ $type }}</option>
+            @endforeach
+        </select> <br>
         Active: <select name="is_active" id="is_active" required value="{{ $employee->is_active }}">
             <option value="1" default>Active</option>
             <option value="0">Inactive</option>

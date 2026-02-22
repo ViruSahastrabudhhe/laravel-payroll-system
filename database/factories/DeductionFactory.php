@@ -18,6 +18,7 @@ class DeductionFactory extends Factory
     {
         return [
             'deduction' => 'GSIS Contribution',
+            'rate' => 0.09,
             'description' => '',
             'user_id' => 1,
         ];

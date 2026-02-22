@@ -16,7 +16,9 @@ class Deduction extends Model
 
     protected $fillable = [
         'deduction',
+        'rate',
         'description',
+        'user_id',
     ];
 
     #[Scope]

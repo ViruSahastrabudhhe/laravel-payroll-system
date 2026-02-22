@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Employee;
+use App\Enums\EmploymentType;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
@@ -32,7 +33,7 @@ class EmployeeFactory extends Factory
             'date_of_birth' => '2026-02-22',
             'address' => 'Address',
             'phone_number' => '09123456789',
-            'employment_type' => 'Regular',
+            'employment_type' => EmploymentType::Regular->value,
             'salary' => 14777.01,
             'is_active' => 1,
             'position_id' => 2,

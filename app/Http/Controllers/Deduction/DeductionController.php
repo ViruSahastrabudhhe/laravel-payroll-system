@@ -64,6 +64,8 @@ class DeductionController extends Controller
      */
     public function destroy(Deduction $deduction)
     {
-        //
+        $deduction->delete();
+
+        return redirect()->route('deductions.index')->with('success', __(''));
     }
 }

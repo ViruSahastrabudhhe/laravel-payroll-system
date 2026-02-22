@@ -17,8 +17,9 @@ class Position extends Model
     protected $table = 'positions';
 
     protected $fillable = [
-'title',
-'user_id',
+        'title',
+        'description',
+        'user_id',
     ];
 
     #[Scope]

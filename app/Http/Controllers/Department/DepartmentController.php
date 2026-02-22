@@ -44,7 +44,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        return redirect()->route('departments.index')->with('success', __('department.show_not_found'));
     }
 
     /**

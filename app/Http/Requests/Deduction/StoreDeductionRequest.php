@@ -11,7 +11,7 @@ class StoreDeductionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreDeductionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'deduction' => 'required',
+            'rate' => 'required|numeric',
+            'description' => 'nullable',
+            'user_id' => 'required',
         ];
     }
 }

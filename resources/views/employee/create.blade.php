@@ -30,9 +30,9 @@
         Salary: <input type="text" name="salary" required> <br>
         Employment Type: <select name="employment_type" id="employment_type" required>
             <option value="">Select employment type</option>
-            <option value="Regular">Regular</option>
-            <option value="Part-Time">Part-Time</option>
-            <option value="JO">JO</option>
+            @foreach($employmentTypes as $type)
+            <option value="{{ $type->value }}">{{ $type }}</option>
+            @endforeach
         </select> <br>
         Status: <select name="is_active" id="is_active" required>
             <option value="1" default>Active</option>

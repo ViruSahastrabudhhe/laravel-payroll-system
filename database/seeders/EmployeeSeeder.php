@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Employee;
+use App\Enums\EmploymentType;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class EmployeeSeeder extends Seeder
@@ -22,7 +23,7 @@ class EmployeeSeeder extends Seeder
             'date_of_birth' => '2026-02-22',
             'address' => 'Address',
             'phone_number' => '09123456789',
-            'employment_type' => 'Regular',
+            'employment_type' => EmploymentType::Regular->value,
             'salary' => 14777.01,
             'is_active' => 1,
             'position_id' => 2,

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Department;
+use App\Enums\EmploymentType;
 use App\Http\Requests\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 
@@ -28,8 +29,9 @@ class EmployeeController extends Controller
     {
         $positions = Position::findAllWithUserID()->get();
         $departments = Department::findAllWithUserID()->get();
+        $employmentTypes = EmploymentType::cases();
 
-        return view('employee.create', ['positions' => $positions, 'departments' => $departments]);
+        return view('employee.create', ['positions' => $positions, 'departments' => $departments, 'employmentTypes' => $employmentTypes]);
     }
 
     /**
@@ -59,12 +61,14 @@ class EmployeeController extends Controller
     {
         $positions = Position::all();
         $departments = Department::all();
+        $employmentTypes = EmploymentType::cases();
 
         return view('employee.edit', 
             [
                 'employee' => $employee,
                 'positions' => $positions,
                 'departments' => $departments,
+                'employmentTypes' => $employmentTypes,
             ]
         );
     }

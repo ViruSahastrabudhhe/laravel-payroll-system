@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\EmploymentType;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->dateTime('date_of_birth');
             $table->string('address');
             $table->string('phone_number');
-            $table->string('employment_type');
+            $table->enum('employment_type', EmploymentType::cases());
             $table->double('salary');
             $table->string('is_active');
             $table->integer('position_id');
