@@ -29,7 +29,6 @@ class UpdateEmployeeRequest extends FormRequest
             'date_of_birth' => 'required',
             'address' => 'required',
             'phone_number' => 'required',
-            'salary' => 'required|numeric',
             'employment_type' => 'required',
             'is_active' => 'required',
             'position_id' => 'required',

@@ -15,20 +15,39 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        Employee::factory()->create([   
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'gender' => 'Male',
-            'email' => 'johndoe@example.com',
-            'date_of_birth' => '2026-02-22',
-            'address' => 'Address',
-            'phone_number' => '09123456789',
-            'employment_type' => EmploymentType::Regular->value,
-            'salary' => 14777.01,
-            'is_active' => 1,
-            'position_id' => 2,
-            'department_id' => 2,
-            'user_id' => 1,
-        ]);
+        Employee::factory()
+            ->count(2)
+            ->state(new Sequence(
+                [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'gender' => 'Male',
+                'email' => 'johndoe@example.com',
+                'date_of_birth' => '2004-12-10',
+                'address' => 'Address',
+                'phone_number' => '09123456789',
+                'employment_type' => EmploymentType::Regular->value,
+                'is_active' => 1,
+                'position_id' => 2,
+                'department_id' => 2,
+                'user_id' => 1,
+                ],
+                [
+                'first_name' => 'Jane',
+                'last_name' => 'Mary',
+                'gender' => 'Female',
+                'email' => 'maryjane@example.com',
+                'date_of_birth' => '2004-08-28',
+                'address' => 'Address',
+                'phone_number' => '09123456789',
+                'employment_type' => EmploymentType::Regular->value,
+                'is_active' => 1,
+                'position_id' => 3,
+                'department_id' => 3,
+                'user_id' => 1,
+                ],
+
+            ))
+            ->create();
     }
 }

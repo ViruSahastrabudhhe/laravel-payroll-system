@@ -18,6 +18,7 @@ class Position extends Model
 
     protected $fillable = [
         'title',
+        'salary_grade',
         'description',
         'user_id',
     ];

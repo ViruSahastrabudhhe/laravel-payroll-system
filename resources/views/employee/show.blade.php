@@ -18,8 +18,8 @@
             <li>Address: {{ $employee->address }}</li>
             <li>Contact no.: {{ $employee->phone_number }}</li>
             <li>Position: {{ $employee->position->title }}</li>
+            <li>Salary Grade: SG{{ $employee->position->salary_grade }}</li>
             <li>Department: {{ $employee->department->name }}</li>
-            <li>Salary: {{ $employee->salary }}</li>
             <li>Employment Type: {{ $employee->employment_type }}</li>
             <li>Status: {{ $employee->is_active ? 'Active' : 'Inactive'}}</li>
         </ul>

@@ -12,6 +12,8 @@
         <thead>
             <tr>
                 <th>Position title</th>
+                <th>Salary grade</th>
+                <th>Description</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -19,6 +21,8 @@
             @forelse($positions as $position)
             <tr>
                 <td>{{ $position->title }}</td>
+                <td>SG{{ $position->salary_grade }}</td>
+                <td>{{ $position->description }}</td>
                 <td>
                     <a href="{{ route('positions.edit', $position) }}">
                         <button>Edit</button>

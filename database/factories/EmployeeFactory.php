@@ -34,7 +34,6 @@ class EmployeeFactory extends Factory
             'address' => 'Address',
             'phone_number' => '09123456789',
             'employment_type' => EmploymentType::Regular->value,
-            'salary' => 14777.01,
             'is_active' => 1,
             'position_id' => 2,
             'department_id' => 2,

@@ -7,6 +7,8 @@ use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Position\PositionController;
 use App\Http\Controllers\Department\DepartmentController;
 use App\Http\Controllers\Deduction\DeductionController;
+use App\Http\Controllers\Attendance\AttendanceController;
+use App\Http\Controllers\Payroll\PayrollController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -36,4 +38,7 @@ Route::prefix('manager')->middleware(['auth', 'verified'])->group(function() {
     Route::resource('positions', PositionController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('deductions', DeductionController::class);
+    Route::post('attendances/store_with_csv', [AttendanceController::class, 'csvStore'])->name('attendances.csvStore');
+    Route::resource('attendances', AttendanceController::class);
+    Route::resource('payroll', PayrollController::class);
 });

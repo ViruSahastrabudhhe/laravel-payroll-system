@@ -25,7 +25,6 @@ class Employee extends Model
         'address',
         'phone_number',
         'employment_type',
-        'salary',
         'is_active',
         'position_id',  
         'department_id',

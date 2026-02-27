@@ -26,6 +26,7 @@ class PositionFactory extends Factory
     {
         return [
             'title' => 'Administrative Aide I',
+            'salary_grade' => 1,
             'user_id' => 1,
         ];
     }

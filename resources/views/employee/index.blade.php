@@ -15,7 +15,7 @@
                 <th>Name</th>
                 <th>Position</th>
                 <th>Department</th>
-                <th>Salary</th>
+                <th>Salary Grade</th>
                 <th>Employment Type</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -28,7 +28,7 @@
                 <td>{{ $employee->first_name }} {{ $employee->last_name }}</td>
                 <td>{{ $employee->position->title }}</td>
                 <td>{{ $employee->department->name }}</td>
-                <td>{{ $employee->salary }}</td>
+                <td>SG{{ $employee->position->salary_grade }}</td>
                 <td>{{ $employee->employment_type }}</td>
                 <td>{{ $employee->is_active ? 'Active' : 'Inactive'}}</td>
                 <td>

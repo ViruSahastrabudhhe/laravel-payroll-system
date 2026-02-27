@@ -27,7 +27,6 @@
                 <option value="{{ $department->id }}">{{ $department->name }}</option>
             @endforeach
         </select> <br>
-        Salary: <input type="text" name="salary" required> <br>
         Employment Type: <select name="employment_type" id="employment_type" required>
             <option value="">Select employment type</option>
             @foreach($employmentTypes as $type)

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone_number');
             $table->enum('employment_type', EmploymentType::cases());
-            $table->double('salary');
             $table->string('is_active');
             $table->integer('position_id');
             $table->integer('department_id');

@@ -32,7 +32,6 @@
                 <option value="{{ $department->id }}">{{ $department->name }}</option>
             @endforeach
         </select> <br>
-        Salary grade: <input type="text" name="salary" required value="{{ $employee->salary }}"> <br>
         Employment Type: <select name="employment_type" id="employment_type" required>
             <option value="{{ $employee->employment_type }}" selected>{{ $employee->employment_type }}</option>
             <option value="" disabled>-----</option>
