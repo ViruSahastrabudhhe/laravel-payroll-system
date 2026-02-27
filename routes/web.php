@@ -7,16 +7,31 @@ use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Position\PositionController;
 use App\Http\Controllers\Department\DepartmentController;
 use App\Http\Controllers\Deduction\DeductionController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 Auth::routes();
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('home');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-Route::prefix('manager')->middleware(['auth'])->group(function() {
+Route::prefix('email')->middleware(['auth'])->group(function () {
+    Route::view('/verify', 'auth.verify')->name('verification.notice');
+    Route::get('/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect('/home');
+    })->name('verification.verify');
+    Route::post('verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['throttle:6,1'])->name('verification.resend');
+});
+
+Route::prefix('manager')->middleware(['auth', 'verified'])->group(function() {
     Route::resource('employees', EmployeeController::class);
     Route::resource('positions', PositionController::class);
     Route::resource('departments', DepartmentController::class);
