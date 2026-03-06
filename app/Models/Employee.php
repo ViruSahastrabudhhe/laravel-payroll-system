@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Department;
 use App\Models\Position;
+use Carbon\Carbon;
+use App\Enums\EmploymentType;
 use App\Models\Scopes\EmployeeScope;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,21 +44,25 @@ class Employee extends Model
     public function position() {
         return $this->hasOne(Position::class, 'id', 'position_id');
     }
-     
-    public function hoursWorked(int $employee_id) {
-        $hoursWorked = DB::table('attendances')
-            ->where('user_id', '=', auth()->user()->id)
-            ->where('employee_id', '=', $employee_id)
-            ->sum('total_time');
 
-        return $hoursWorked;
+    public function isRegular() {
+        return $this->employment_type == EmploymentType::Regular->name;
+    }
+     
+    public function hoursWorked(int $employee_id): int {
+        $totalHours = DB::table('attendances')
+            ->where('user_id', '=', auth()->user()->id)
+            ->select(DB::raw('SUM(TIMESTAMPDIFF(SECOND, time_in, time_out)) / 3600 as total_hours'))
+            ->first();
+
+        return $totalHours->total_hours;
     }
 
     public function overtimeWorked(int $employee_id) {
         $overtimeWorked = DB::table('attendances')
             ->where('user_id', '=', auth()->user()->id)
             ->where('employee_id', '=', $employee_id)
-            ->sum('overtime');
+            ->sum('overtime_in');
 
         return $overtimeWorked;
     }
@@ -77,10 +83,14 @@ class Employee extends Model
         return $overtimePay;
     }
 
-    public function gsisContribution() {
+    public function gsisContribution(): float {
+        if (!$this->isRegular()) {
+            return 0;
+        }
+
         $gsis = DB::table('deductions')
             ->where('user_id', '=', auth()->user()->id)
-            ->where('id', '=', '1')
+            ->where('deduction', '=', 'GSIS Contribution')
             ->pluck('rate');
 
         $calc = $this->position->salary_amount * $gsis[0];
@@ -88,10 +98,14 @@ class Employee extends Model
         return $calc;
     }
 
-    public function philHealthContribution() {
+    public function philHealthContribution(): float {
+        if (!$this->isRegular()) {
+            return 0;
+        }
+        
         $philhealth = DB::table('deductions')
             ->where('user_id', '=', auth()->user()->id)
-            ->where('id', '=', '2')
+            ->where('deduction', '=', 'PhilHealth Contribution')
             ->pluck('rate');
 
         $calc = $this->position->salary_amount * $philhealth[0];
@@ -103,10 +117,14 @@ class Employee extends Model
         return $calc;
     }
 
-    public function pagIbigContribution() {
+    public function pagIbigContribution(): float {
+        if (!$this->isRegular()) {
+            return 0;
+        }
+
         $pagibig = DB::table('deductions')
             ->where('user_id', '=', auth()->user()->id)
-            ->where('id', '=', '3')
+            ->where('deduction', '=', 'Pag-Ibig Contribution')
             ->pluck('rate');
 
         if ($this->position->salary_amount > 1500) {
@@ -114,8 +132,6 @@ class Employee extends Model
         } else {
             return 100;
         }
-
-        return $calc;
     }
 
     public function netTaxableIncome(int $employee_id) {
@@ -129,9 +145,9 @@ class Employee extends Model
         $netTaxableIncome = $this->netTaxableIncome($employee_id);
         $calc = 0;
 
-        if ($netTaxableIncome <= 20833) {
+        if ($netTaxableIncome < 20833) {
             return 0;
-        } elseif ($netTaxableIncome > 20833 && $netTaxableIncome <= 33332) {
+        } elseif ($netTaxableIncome >= 20833 && $netTaxableIncome <= 33332) {
             $calc = $netTaxableIncome - 20833;
             return $calc * 0.15;
         } elseif ($netTaxableIncome >= 33333 && $netTaxableIncome <= 66666) {

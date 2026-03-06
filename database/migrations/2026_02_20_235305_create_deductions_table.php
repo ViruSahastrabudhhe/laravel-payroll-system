@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('deduction');
             $table->double('rate');
             $table->text('description')->nullable();
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')

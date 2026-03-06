@@ -17,13 +17,10 @@
                 <th>Date</th>
                 <th>Time In</th>
                 <th>Time Out</th>
-                <th>Break In</th>
-                <th>Break Out</th>
-                <th>Overtime</th>
-                <th>Undertime</th>
-                <th>Late Time</th>
-                <th>Total Time</th>
-                <th>Total Break</th>
+                <th>PM In</th>
+                <th>PM Out</th>
+                <th>OT In</th>
+                <th>OT Out</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -35,13 +32,10 @@
                 <td>{{ $attendance->date }}</td>
                 <td>{{ $attendance->time_in }}</td>
                 <td>{{ $attendance->time_out }}</td>
-                <td>{{ $attendance->break_in }}</td>
-                <td>{{ $attendance->break_out }}</td>
-                <td>{{ $attendance->overtime }}</td>
-                <td>{{ $attendance->undertime }}</td>
-                <td>{{ $attendance->late }}</td>
-                <td>{{ $attendance->total_time }}</td>
-                <td>{{ $attendance->total_break }}</td>
+                <td>{{ $attendance->pm_in }}</td>
+                <td>{{ $attendance->pm_out }}</td>
+                <td>{{ $attendance->overtime_in }}</td>
+                <td>{{ $attendance->overtime_out }}</td>
                 <td>
                     <form action="{{ route('attendances.destroy', $attendance) }}" method="post">
                         @csrf

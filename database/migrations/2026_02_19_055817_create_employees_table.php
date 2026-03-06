@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('phone_number');
             $table->enum('employment_type', EmploymentType::cases());
             $table->string('is_active');
-            $table->integer('position_id');
-            $table->integer('department_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('position_id')
                     ->references('id')->on('positions')

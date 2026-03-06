@@ -16,7 +16,6 @@
                 <li><a href="{{ route('employees.index') }}">Employees</a></li>
                 <li><a href="{{ route('positions.index') }}">Positions</a></li>
                 <li><a href="{{ route('departments.index') }}">Departments</a></li>
-                <li><a href="{{ route('deductions.index') }}">Deductions</a></li>
                 <li><a href="{{ route('attendances.index') }}">Attendance</a></li>
                 <li><a href="{{ route('payroll.index') }}">Payroll</a></li>
                 <li><a href="#">Reports</a></li>

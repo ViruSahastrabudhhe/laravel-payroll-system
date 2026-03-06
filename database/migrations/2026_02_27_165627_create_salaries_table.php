@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->float('amount');
             $table->float('annual');
-            $table->integer('position_id');
+            $table->unsignedBigInteger('position_id');
             $table->timestamps();
         });
     }

@@ -30,7 +30,7 @@
                 <td>{{ $employee->department->name }}</td>
                 <td>SG{{ $employee->position->salary_grade }}</td>
                 <td>{{ $employee->employment_type }}</td>
-                <td>{{ $employee->is_active ? 'Active' : 'Inactive'}}</td>
+                <td>{{ $employee->is_active ? 'Active' : 'Inactive' }}</td>
                 <td>
                     <a href="{{ route('employees.show', $employee) }}">
                         <button>Show</button>

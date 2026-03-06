@@ -17,9 +17,9 @@ class DeductionSeeder extends Seeder
         Deduction::factory()
             ->count(3)
             ->state(new Sequence(
-                ['deduction' => 'GSIS Contribution', 'rate' => 0.09, 'description' => '9% deduction on salary'],
-                ['deduction' => 'PhilHealth Contribution', 'rate' => 0.025, 'description' => '2.5% deduction on salary'],
-                ['deduction' => 'Pag-Ibig Contribution', 'rate' => 0.02, 'description' => '2% deduction on salary if > P1,500, else 1% deduction'],
+                ['deduction' => 'GSIS Contribution', 'rate' => 0.09, 'description' => 'If regular, 5% deduction on salary'],
+                ['deduction' => 'PhilHealth Contribution', 'rate' => 0.025, 'description' => 'If regular, 2.5% deduction on salary'],
+                ['deduction' => 'Pag-Ibig Contribution', 'rate' => 0.02, 'description' => 'If regular, 2% deduction on salary if > P1,500, else 1% deduction'],
             ))
             ->create();
     }

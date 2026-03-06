@@ -37,7 +37,6 @@ Route::prefix('manager')->middleware(['auth', 'verified'])->group(function() {
     Route::resource('employees', EmployeeController::class);
     Route::resource('positions', PositionController::class);
     Route::resource('departments', DepartmentController::class);
-    Route::resource('deductions', DeductionController::class);
     Route::post('attendances/store_with_csv', [AttendanceController::class, 'csvStore'])->name('attendances.csvStore');
     Route::resource('attendances', AttendanceController::class);
     Route::resource('payroll', PayrollController::class);

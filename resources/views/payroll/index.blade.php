@@ -32,9 +32,27 @@
                 <td>{{ $employee->hoursWorked($employee->id) }}</td>
                 <td>P{{ round($employee->grossPay($employee->id), 2) }}</td>
                 <td>P{{ round($employee->netTaxableIncome($employee->id), 2) }}</td>
-                <td>P{{ round($employee->gsisContribution(), 2) }}</td>
-                <td>P{{ round($employee->philHealthContribution(), 2) }}</td>
-                <td>P{{ $employee->pagIbigContribution() }}</td>
+                <td>
+                    @if ($employee->isRegular())
+                    P{{ round($employee->gsisContribution(), 2) }}
+                    @else
+                    -
+                    @endif
+                </td>
+                <td>
+                    @if ($employee->isRegular())
+                    P{{ round($employee->philHealthContribution(), 2) }}
+                    @else
+                    -
+                    @endif
+                </td>
+                <td>
+                    @if ($employee->isRegular())
+                    P{{ $employee->pagIbigContribution() }}
+                    @else
+                    -
+                    @endif
+                </td>
                 <td>P{{ round($employee->withholdingTax($employee->id), 2) }}</td>
                 <td>-</td>
                 <td>-</td>

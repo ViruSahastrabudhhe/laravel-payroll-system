@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Attendance;
 use App\Models\Attendance;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Http\Requests\Attendance\StoreAttendanceRequest;
 use App\Http\Requests\Attendance\UpdateAttendanceRequest;
 
@@ -52,20 +53,17 @@ class AttendanceController extends Controller
 
                 foreach ($data as $row) {
                     Attendance::updateOrCreate(
-                        ['employee_id' => $row[10], 'date' => $row[0]],
+                        ['employee_id' => $row[7], 'date' => $row[0]],
                         [
                             'date' => $row[0],
                             'time_in' => $row[1],
                             'time_out' => $row[2],
-                            'break_in' => $row[3],
-                            'break_out' => $row[4],
-                            'overtime' => $row[5],
-                            'undertime' => $row[6],
-                            'late' => $row[7],
-                            'total_time' => $row[8],
-                            'total_break' => $row[9],
-                            'employee_id' => $row[10],
-                            'user_id' => $row[11]
+                            'pm_in' => $row[3],
+                            'pm_out' => $row[4],
+                            'overtime_in' => $row[5],
+                            'overtime_out' => $row[6],
+                            'employee_id' => $row[7],
+                            'user_id' => $row[8]
                         ]
                     );
                 }

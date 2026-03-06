@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('salary_grade');
             $table->float('salary_amount');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')

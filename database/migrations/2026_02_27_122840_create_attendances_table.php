@@ -16,15 +16,12 @@ return new class extends Migration
             $table->date('date');
             $table->time('time_in');
             $table->time('time_out');
-            $table->time('break_in');
-            $table->time('break_out');
-            $table->time('overtime');
-            $table->time('undertime');
-            $table->time('late');
-            $table->time('total_time');
-            $table->time('total_break');
-            $table->integer('employee_id');
-            $table->integer('user_id');
+            $table->time('pm_in');
+            $table->time('pm_out');
+            $table->time('overtime_in');
+            $table->time('overtime_out');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('employee_id')
                     ->references('id')->on('employees')
