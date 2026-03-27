@@ -108,4 +108,19 @@ class AttendanceController extends Controller
 
         return redirect()->route('attendances.index')->with('message', __('attendance.success_deleting'));
     }
+        
+    public function restore($attendanceId)
+    {
+        Attendance::onlyTrashed()->find($attendanceId)->restore();
+
+        return redirect()->route('attendances.archive')->with('success', __('attendance.success_deleting'));
+        
+    }
+
+    public function archive() 
+    {
+        $attendances = Attendance::findAllWithUserID()->onlyTrashed()->get();
+
+        return view('attendance.archive', ['attendances' => $attendances]);
+    }
 }

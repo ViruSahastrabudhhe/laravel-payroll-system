@@ -6,12 +6,10 @@
 </div>
 
 <div>
-    <a href="{{ route('attendances.create') }}">
-        <button>{{ __('attendance.create') }}</button>
+    <a href="{{ route('attendances.index') }}">
+        <button>{{ __('attendance.back') }}</button>
     </a>
-    <a href="{{ route('attendances.archive') }}">
-        <button>{{ __('attendance.archive') }}</button>
-    </a>
+
 </div>
 
 <div>
@@ -45,10 +43,10 @@
                 <td>{{ $attendance->overtime_in }}</td>
                 <td>{{ $attendance->overtime_out }}</td>
                 <td>
-                    <form action="{{ route('attendances.destroy', $attendance) }}" method="post">
+                    <form action="{{ route('attendances.restore', $attendance->id) }}" method="post">
                         @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Archive">
+                        @method('PUT')
+                        <input type="submit" value="Restore">
                     </form>
                 </td>
             </tr>

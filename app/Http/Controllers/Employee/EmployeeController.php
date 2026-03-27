@@ -120,4 +120,18 @@ class EmployeeController extends Controller
 
         return redirect()->route('employees.index')->with('success', __('employee.success_deleting'));
     }
+        
+    public function restore($employeeId)
+    {
+        Employee::onlyTrashed()->find($employeeId)->restore();
+
+        return redirect()->route('employees.archive')->with('success', __('employee.success_restoring'));
+        
+    }
+
+    public function archive() {
+        $employees = Employee::findAllWithUserID()->onlyTrashed()->get();
+
+        return view('employee.archive', ['employees' => $employees]);
+    }
 }

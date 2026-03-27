@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('employee_id')
                     ->references('id')->on('employees')
                     ->onUpdate('cascade')

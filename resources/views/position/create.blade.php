@@ -3,7 +3,7 @@
 @section('content')
 <div>
     <a href="{{ route('positions.index') }}">
-        <button>Back to positions</button>
+        <button>{{ __('position.back') }}</button>
     </a>
 </div>
 

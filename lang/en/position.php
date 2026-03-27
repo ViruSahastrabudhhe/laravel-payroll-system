@@ -1,7 +1,16 @@
 <?php
 
 return [
-    'success_creating' => 'Successfully created new position!',
-    'success_deleting' => 'Successfully deleted position!',
-    'success_updating' => 'Successfully updated position information!',
+    'title' => 'Designations',
+
+    'sidebar' => 'Designations List',
+
+    'create' => 'Create Designation',
+    'back' => 'Back to Designations List',
+    'archive' => 'Designation Archives',
+    'edit' => 'Edit Designation',
+
+    'success_creating' => 'Successfully created new designation!',
+    'success_deleting' => 'Successfully deleted designation!',
+    'success_updating' => 'Successfully updated designation!',
 ];

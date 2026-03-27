@@ -2,15 +2,19 @@
 
 @section('content')
 <div>
+    <h1>{{ __('employee.title') }}</h1>
+</div>
+
+<div>
     <a href="{{ route('employees.index') }}">
-        <button>Back to employees</button>
+        <button>{{ __('employee.back') }}</button>
     </a>
 </div>
 
 <div class="container">
     <h3>Information</h3>
     <a href="{{ route('employees.edit', $employee) }}">
-        Edit employee information
+        {{ __('employee.edit') }}
     </a>
     <ul>
         <li>{{ $employee->first_name }} {{ $employee->last_name }}</li>

@@ -2,8 +2,12 @@
 
 @section('content')
 <div>
+    <h1>{{ __('department.title') }}</h1>
+</div>
+
+<div>
     <a href="{{ route('departments.create') }}">
-        <button>Create department</button>
+        <button>{{ __('department.create') }}</button>
     </a>
 </div>
 

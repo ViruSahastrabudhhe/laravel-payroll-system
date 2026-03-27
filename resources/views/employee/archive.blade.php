@@ -6,11 +6,8 @@
 </div>
 
 <div>
-    <a href="{{ route('employees.create') }}">
-        <button>{{ __('employee.create') }}</button>
-    </a>
-    <a href="{{ route('employees.archive') }}">
-        <button>{{ __('employee.archive') }}</button>
+    <a href="{{ route('employees.index') }}">
+        <button>{{ __('employee.back') }}</button>
     </a>
 </div>
 
@@ -45,10 +42,10 @@
                     <a href="{{ route('employees.edit', $employee) }}">
                         <button>Edit</button>
                     </a>
-                    <form action="{{ route('employees.destroy', $employee) }}" method='post'>
+                    <form action="{{ route('employees.restore', $employee->id) }}" method='post'>
                         @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Archive">
+                        @method('PUT')
+                        <input type="submit" value="Restore">
                     </form>
                 </td>
             </tr>

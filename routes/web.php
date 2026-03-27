@@ -39,10 +39,14 @@ Route::prefix('email')->middleware(['auth'])->group(function () {
 });
 
 Route::prefix('manager')->middleware(['auth', 'verified'])->group(function() {
+    Route::get('employees/archives', [EmployeeController::class, 'archive'])->name('employees.archive');
+    Route::put('employees/{employeeId}/restore', [EmployeeController::class, 'restore'])->name('employees.restore');
     Route::resource('employees', EmployeeController::class);
     Route::resource('positions', PositionController::class);
     Route::resource('departments', DepartmentController::class);
     Route::post('attendances/store_with_csv', [AttendanceController::class, 'csvStore'])->name('attendances.csvStore');
+    Route::get('attendances/archives', [AttendanceController::class, 'archive'])->name('attendances.archive');
+    Route::put('attendances/{attendanceId}/restore', [AttendanceController::class, 'restore'])->name('attendances.restore');
     Route::resource('attendances', AttendanceController::class);
     Route::resource('payroll', PayrollController::class);
     Route::resource('deductions', DeductionController::class);

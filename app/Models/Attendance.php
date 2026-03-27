@@ -6,13 +6,14 @@ use App\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 
 class Attendance extends Model
 {
     /** @use HasFactory<\Database\Factories\AttendanceFactory> */
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'attendances';
 

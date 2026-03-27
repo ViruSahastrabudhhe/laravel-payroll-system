@@ -12,27 +12,27 @@
     <div id='app'>
         <nav>
             <ul>
-                <li><a href="{{ route('home') }}">Dashboard</a></li>
-                <li>Organization
+                <li><a href="{{ route('home') }}">{{ __('common.app_dashboard') }}</a></li>
+                <li>{{ __('common.app_organization') }}
                     <ul>
-                        <li><a href="{{ route('departments.index') }}">Departments</a></li>
-                        <li><a href="{{ route('positions.index') }}">Designation</a></li>
+                        <li><a href="{{ route('departments.index') }}">{{ __('department.sidebar') }}</a></li>
+                        <li><a href="{{ route('positions.index') }}">{{ __('position.sidebar') }}</a></li>
                     </ul>
                 </li>
-                <li>Employees
+                <li>{{ __('common.app_employee') }}
                     <ul>
-                        <li><a href="{{ route('employees.index') }}">Employees List</a></li>
-                        <li><a href="{{ route('employees.create') }}">Create Employee</a></li>
+                        <li><a href="{{ route('employees.index') }}">{{ __('employee.sidebar') }}</a></li>
+                        <li><a href="{{ route('employees.create') }}">{{ __('employee.create') }}</a></li>
                     </ul>
                 </li>
-                <li>Attendance
+                <li>{{ __('common.app_attendance') }}
                     <ul>
-                        <li><a href="{{ route('attendances.index') }}">Attendance List</a></li>
-                        <li><a href="{{ route('attendances.create') }}">Create Attendance</a></li>
+                        <li><a href="{{ route('attendances.index') }}">{{ __('attendance.sidebar') }}</a></li>
+                        <li><a href="{{ route('attendances.create') }}">{{ __('attendance.create') }}</a></li>
                         <li><a href="{{ route('leave_balances.index') }}">Employee Leave Balance</a></li>
                     </ul>
                 </li>
-                <li>Leave
+                <li>{{ __('common.app_leave') }}
                     <ul>
                         <li><a href="{{ route('employee_leaves.index') }}">Leaves List</a></li>
                         <li><a href="{{ route('employee_leaves.create') }}">Create Leave Application</a></li>
@@ -40,14 +40,14 @@
                         <li><a href="{{ route('holidays.index') }}">Holidays</a></li>
                     </ul>
                 </li>
-                <li>Deduction
+                <li>{{ __('common.app_deduction') }}
                     <ul>
-                        <li><a href="{{ route('deductions.index') }}">Deductions List</a></li>
-                        <li><a href="{{ route('deductions.create') }}">Create Deduction</a></li>
-                        <li><a href="{{ route('employee_deductions.index') }}">Employee Deductions List</a></li>
+                        <li><a href="{{ route('deductions.index') }}">{{ __('deduction.sidebar') }}</a></li>
+                        <li><a href="{{ route('deductions.create') }}">{{ __('deduction.create') }}</a></li>
+                        <li><a href="{{ route('employee_deductions.index') }}">{{ __('employee.deduction') }}</a></li>
                     </ul>
                 </li>
-                <li>Payroll
+                <li>{{ __('common.app_payroll') }}
                     <ul>
                         <li><a href="{{ route('payroll.index') }}">Payroll List</a></li>
                         <li><a href="#">Generate Payslip</a></li>
@@ -67,10 +67,6 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
             </form>
-        </div>
-
-        <div>
-            <h1>Welcome, {{ auth()->user()->name }}!</h1>
         </div>
 
         <main>

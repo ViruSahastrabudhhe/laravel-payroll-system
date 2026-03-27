@@ -2,8 +2,12 @@
 
 @section('content')
 <div>
+    <h1>{{ __('deduction.title') }}</h1>
+</div>
+
+<div>
     <a href="{{ route('deductions.create') }}">
-        <button>Create deduction</button>
+        <button>{{ __('deduction.create') }}</button>
     </a>
 </div>
 

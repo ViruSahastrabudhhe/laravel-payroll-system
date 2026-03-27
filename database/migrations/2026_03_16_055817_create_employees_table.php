@@ -21,12 +21,13 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->string('phone_number');
             $table->enum('employment_type', EmploymentType::cases());
-            $table->string('is_active');
+            $table->boolean('is_active');
             $table->unsignedBigInteger('address_id');
             $table->unsignedBigInteger('position_id');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('address_id')
                     ->references('id')->on('addresses')
                     ->onUpdate('cascade')

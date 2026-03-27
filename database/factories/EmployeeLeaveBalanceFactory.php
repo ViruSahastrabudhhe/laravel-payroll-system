@@ -17,7 +17,9 @@ class EmployeeLeaveBalanceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'leave_balance' => 15,
+            'employee_id' => 1,
+            'user_id' => 1,
         ];
     }
 }
