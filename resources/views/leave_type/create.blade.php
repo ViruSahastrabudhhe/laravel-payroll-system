@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@section('page_header')
+    <h1>{{ __('leave_type.title') }}</h1>
+@endsection
+
 @section('content')
 <div>
     <a href="{{ route('leave_types.index') }}">
-        <button>Back to Leave Types</button>
+        <button>{{ __('leave_type.back') }}</button>
     </a>
 </div>
 

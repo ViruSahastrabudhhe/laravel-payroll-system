@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_header')
+    <h1>{{ __('position.title') }}</h1>
+@endsection
+
 @section('content')
 <div>
     <a href="{{ route('positions.create') }}">

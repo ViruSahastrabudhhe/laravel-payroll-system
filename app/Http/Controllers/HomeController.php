@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with(['department', 'position'])->get();
+        $employees = Employee::with(['department', 'position'])->findAllWithUserID()->get();
 
         return view('home', [
             'employee_count' => $employees->count(),

@@ -18,7 +18,7 @@
                 </div>
 
                 <div>
-                    <h1>Welcome, {{ auth()->user()->name }}!</h1>
+                    <h1>{{ __('common.app_dashboard') }}</h1>
                 </div>
 
                 <div>

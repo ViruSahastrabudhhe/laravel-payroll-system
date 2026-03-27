@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-<div>
+@section('page_header')
     <h1>{{ __('department.title') }}</h1>
-</div>
+@endsection
 
+@section('content')
 <div>
     <a href="{{ route('departments.create') }}">
         <button>{{ __('department.create') }}</button>

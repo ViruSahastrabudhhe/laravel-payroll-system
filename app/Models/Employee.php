@@ -7,6 +7,7 @@ use App\Models\Position;
 use App\Models\EmployeeDeduction;
 use App\Models\EmployeeLeave;
 use App\Models\EmployeeLeaveBalance;
+use App\Models\Holiday;
 use Carbon\Carbon;
 use App\Enums\EmploymentType;
 use App\Models\Scopes\EmployeeScope;
@@ -268,5 +269,44 @@ class Employee extends Model
     #[Scope]
     protected function findAllWithUserID(Builder $query): void {
         $query->where('user_id', '=', auth()->user()->id);
+    }
+
+    public function latesCount(): int
+    {
+        $workStartTime = config('workschedule.work_start_time');
+        
+        return DB::table('attendances')
+            ->where('user_id', '=', auth()->user()->id)
+            ->where('employee_id', '=', $this->id)
+            ->whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+            ->whereNotNull('time_in')
+            ->whereRaw("TIME(time_in) > ?", [$workStartTime])
+            ->count();
+    }
+
+    public static function workDaysInCurrentMonth(): int
+    {
+        $now = Carbon::now();
+        return self::workDaysInMonth($now->year, $now->month);
+    }
+
+    public static function workDaysInMonth($year, $month): int
+    {
+        $startOfMonth = Carbon::create($year, $month, 1)->startOfMonth();
+        $endOfMonth = Carbon::create($year, $month, 1)->endOfMonth();
+        
+        $holidayDates = Holiday::getHolidayDatesInMonth($year, $month, auth()->user()->id);
+        
+        $workDays = 0;
+        $current = $startOfMonth->copy();
+        
+        while ($current->lte($endOfMonth)) {
+            if (!$current->isWeekend() && !in_array($current->format('Y-m-d'), $holidayDates)) {
+                $workDays++;
+            }
+            $current->addDay();
+        }
+        
+        return $workDays;
     }
 }

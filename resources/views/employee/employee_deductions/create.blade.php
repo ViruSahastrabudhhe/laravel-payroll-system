@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@section('page_header')
+    <h1>{{ __('employee_deduction.title') }}</h1>
+@endsection
+
 @section('content')
 <div>
     <a href="{{ route('employee_deductions.index') }}">
-        <button>Back to employee deductions</button>
+        <button>{{ __('employee_deduction.back') }}</button>
     </a>
 </div>
 

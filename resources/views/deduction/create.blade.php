@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-<div>
+@section('page_header')
     <h1>{{ __('deduction.title') }}</h1>
-</div>
+@endsection
 
+@section('content')
 <div>
     <a href="{{ route('deductions.index') }}">
         <button>{{ __('deduction.back') }}</button>

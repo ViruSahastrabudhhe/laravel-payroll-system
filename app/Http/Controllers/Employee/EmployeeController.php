@@ -14,6 +14,8 @@ use App\Http\Requests\Employee\UpdateEmployeeRequest;
 
 class EmployeeController extends Controller
 {
+    public $title = 'Employee';
+
     /**
      * Display a listing of the resource.
      */

@@ -21,6 +21,10 @@ class EmployeeLeaveBalance extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'leave_balance' => 'decimal:1',
+    ];
+
     public function employee() {
         return $this->belongsTo(Employee::class);
     }

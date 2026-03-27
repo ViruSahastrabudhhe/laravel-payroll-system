@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-<div>
-    
-</div>
+@section('page_header')
+    <h1>{{ __('payroll.title') }}</h1>
+@endsection
 
+@section('content')
 <div class="container">
     <h3>Month of {{ $calendar->format('F') }}, {{ $calendar->format('Y') }}</h3>
     <table>

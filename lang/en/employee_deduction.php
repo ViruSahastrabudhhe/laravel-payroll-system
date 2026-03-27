@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'title' => 'Employees',
+    'title' => 'Employee Deductions',
 
-    'sidebar' => 'Employees List',
+    'sidebar' => 'Employee Deductions List',
 
-    'create' => 'Create Employee',
-    'back' => 'Back to Employees List',
-    'archive' => 'Employee Archives',
-    'edit' => 'Edit Employee',
+    'create' => 'Create Employee Deduction',
+    'back' => 'Back to Employee Deductions List',
+    'archive' => 'Employee Deduction Archives',
+    'edit' => 'Edit Employee Deduction',
 
     'success_creating' => 'Successfully created new employee!',
     'success_deleting' => 'Successfully archived employee!',
@@ -18,5 +18,5 @@ return [
     'error_deleting' => 'Error archiving employee!',
     'error_editing' => 'Error editing employee!',
     'error_restoring' => 'Error restoring employee!',
-    'show_not_found' => 'Employee not found!',
+    'show_not_found' => 'Employee Deductions not found!',
 ];

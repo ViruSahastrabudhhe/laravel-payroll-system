@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@section('page_header')
+    <h1>{{ __('holiday.title') }}</h1>
+@endsection
+
 @section('content')
 <div>
     <a href="{{ route('holidays.index') }}">
-        <button>Back to Holidays</button>
+        <button>{{ __('holiday.back') }}</button>
     </a>
 </div>
 
