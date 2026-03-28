@@ -17,7 +17,7 @@ use App\Http\Controllers\Leave\HolidayController;
 use App\Http\Controllers\Leave\LeaveTypeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
     return redirect()->route('home');
