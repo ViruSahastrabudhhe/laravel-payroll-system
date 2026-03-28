@@ -25,19 +25,6 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-Route::prefix('email')->middleware(['auth'])->group(function () {
-    Route::view('/verify', 'auth.verify')->name('verification.notice');
-    Route::get('/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return redirect('/home');
-    })->name('verification.verify');
-    Route::post('verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-
-        return back()->with('message', 'Verification link sent!');
-    })->middleware(['throttle:6,1'])->name('verification.resend');
-});
-
 Route::prefix('manager')->middleware(['auth', 'verified'])->group(function() {
     Route::get('employees/archives', [EmployeeController::class, 'archive'])->name('employees.archive');
     Route::put('employees/{employeeId}/restore', [EmployeeController::class, 'restore'])->name('employees.restore');
