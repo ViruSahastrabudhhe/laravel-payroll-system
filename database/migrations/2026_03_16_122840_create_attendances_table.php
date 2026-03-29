@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
             $table->time('time_in');
             $table->time('time_out');
             $table->time('pm_in');
             $table->time('pm_out');
             $table->time('overtime_in');
             $table->time('overtime_out');
+            $table->date('date');
+            $table->integer('total_minutes')->default(0);
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

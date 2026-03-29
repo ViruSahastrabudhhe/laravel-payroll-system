@@ -10,6 +10,7 @@ return [
     'archive' => 'Employee Archives',
     'edit' => 'Edit Employee',
     'deduction' => 'Employee Deductions List',
+    'attendance' => 'Employee Attendances List',
 
     'success_creating' => 'Successfully created new employee!',
     'success_deleting' => 'Successfully archived employee!',

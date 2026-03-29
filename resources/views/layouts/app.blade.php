@@ -25,10 +25,12 @@
                         <li><a href="{{ route('employees.create') }}">{{ __('employee.create') }}</a></li>
                     </ul>
                 </li>
-                <li>{{ __('common.app_attendance') }}
+                <li>{{ __('common.app_schedule') }}
                     <ul>
+                        <li><a href="#">{{ __('schedule.sidebar') }}</a></li>
                         <li><a href="{{ route('attendances.index') }}">{{ __('attendance.sidebar') }}</a></li>
                         <li><a href="{{ route('attendances.create') }}">{{ __('attendance.create') }}</a></li>
+                        <li><a href="#">{{ __('employee.attendance') }}</a></li>
                         <li><a href="{{ route('leave_balances.index') }}">Employee Leave Balance</a></li>
                     </ul>
                 </li>
