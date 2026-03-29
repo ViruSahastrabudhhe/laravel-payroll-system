@@ -11,4 +11,15 @@ return [
 
     'department' => 'Department',
     'designation' => 'Designation',
+
+    'create' => 'Create',
+    'show' => 'Show',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'archive' => 'Archive',
+    'restore' => 'Restore',
+    'back' => 'Back',
+
+    'delete_confirm' => 'Are you sure to delete this item?',
+    'restore_confirm' => 'Are you sure to restore this item?',
 ]; 

@@ -5,7 +5,7 @@ return [
 
     'sidebar' => 'Employees List',
 
-    'create' => 'Create Employee',
+    'create' => 'Register Employee',
     'back' => 'Back to Employees List',
     'archive' => 'Employee Archives',
     'edit' => 'Edit Employee',
