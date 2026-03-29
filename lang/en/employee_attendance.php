@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'title' => 'Attendances',
+    'title' => 'Employee Attendances',
 
-    'sidebar' => 'Attendances List',
+    'sidebar' => 'Employee Attendances List',
 
-    'create' => 'Create Attendance',
-    'back' => 'Back to Attendances List',
-    'archive' => 'Attendance Archives',
+    'create' => 'Create Employee Attendance',
+    'back' => 'Back to Employee Attendances List',
+    'archive' => 'Employee Attendance Archives',
     'edit' => 'Edit Attendance',
 
     'success_creating' => 'Successfully created new attendance!',

@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    <h1>{{ __('attendance.title') }}</h1>
-</div>
-
-<div>
     <a href="{{ route('attendances.index') }}">
         <button>{{ __('attendance.back') }}</button>
     </a>

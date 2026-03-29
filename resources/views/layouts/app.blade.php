@@ -28,17 +28,19 @@
                 <li>{{ __('common.app_schedule') }}
                     <ul>
                         <li><a href="#">{{ __('schedule.sidebar') }}</a></li>
+                        <li><a href="#">{{ __('schedule.create') }}</a></li>
                         <li><a href="{{ route('attendances.index') }}">{{ __('attendance.sidebar') }}</a></li>
                         <li><a href="{{ route('attendances.create') }}">{{ __('attendance.create') }}</a></li>
-                        <li><a href="#">{{ __('employee.attendance') }}</a></li>
+                        <li><a href="#">{{ __('employee_attendance.sidebar') }}</a></li>
                         <li><a href="{{ route('leave_balances.index') }}">Employee Leave Balance</a></li>
                     </ul>
                 </li>
                 <li>{{ __('common.app_leave') }}
                     <ul>
-                        <li><a href="{{ route('employee_leaves.index') }}">Leaves List</a></li>
-                        <li><a href="{{ route('employee_leaves.create') }}">Create Leave Application</a></li>
-                        <li><a href="{{ route('leave_types.index') }}">Leave Types</a></li>
+                        <li><a href="{{ route('leave_types.index') }}">{{ __('leave_type.sidebar') }}</a></li>
+                        <li><a href="{{ route('leave_types.create') }}">{{ __('leave_type.create') }}</a></li>
+                        <li><a href="{{ route('employee_leaves.index') }}">{{ __('employee_leave.sidebar') }}</a></li>
+                        <li><a href="{{ route('employee_leaves.create') }}">{{ __('employee_leave.create') }}</a></li>
                         <li><a href="{{ route('holidays.index') }}">Holidays</a></li>
                     </ul>
                 </li>
@@ -46,13 +48,13 @@
                     <ul>
                         <li><a href="{{ route('deductions.index') }}">{{ __('deduction.sidebar') }}</a></li>
                         <li><a href="{{ route('deductions.create') }}">{{ __('deduction.create') }}</a></li>
-                        <li><a href="{{ route('employee_deductions.index') }}">{{ __('employee.deduction') }}</a></li>
+                        <li><a href="{{ route('employee_deductions.index') }}">{{ __('employee_deduction.sidebar') }}</a></li>
                     </ul>
                 </li>
                 <li>{{ __('common.app_payroll') }}
                     <ul>
-                        <li><a href="{{ route('payroll.index') }}">Payroll List</a></li>
-                        <li><a href="#">Generate Payslip</a></li>
+                        <li><a href="{{ route('payroll.index') }}">{{ __('payroll.sidebar') }}</a></li>
+                        <li><a href="#">{{ __('payroll.create') }}</a></li>
                         <li><a href="#">Reports</a></li>
                     </ul>
                 </li>
@@ -82,6 +84,10 @@
             </div>
             @endif
             
+            @if(isset($pageTitle))
+                <h1>{{ $pageTitle }}</h1>
+            @endif
+
             @yield('content')
         </main>
     </div>

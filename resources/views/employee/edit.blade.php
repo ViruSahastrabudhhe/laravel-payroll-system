@@ -2,10 +2,6 @@
 
 @section('content')
 <div>
-    <h1>{{ __('employee.title') }}</h1>
-</div>
-
-<div>
     <a href="{{ route('employees.index') }}">Back to Employees</a>
 </div>
 

@@ -5,17 +5,16 @@ return [
 
     'sidebar' => 'Employees List',
 
-    'create' => 'Create Employee',
+    'create' => 'Register Employee',
     'back' => 'Back to Employees List',
     'archive' => 'Employee Archives',
     'edit' => 'Edit Employee',
-    'deduction' => 'Employee Deductions List',
-    'attendance' => 'Employee Attendances List',
 
     'success_creating' => 'Successfully created new employee!',
     'success_deleting' => 'Successfully archived employee!',
     'success_editing' => 'Successfully edited employee!',
     'success_restoring' => 'Successfully restored employee!',
+    
     'error_creating' => 'Error creating new employee!',
     'error_deleting' => 'Error archiving new employee!',
     'error_editing' => 'Error editing new employee!',

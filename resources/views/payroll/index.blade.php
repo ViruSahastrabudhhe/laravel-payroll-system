@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    
-</div>
-
 <div class="container">
     <h3>Month of {{ $calendar->format('F') }}, {{ $calendar->format('Y') }}</h3>
     <table>

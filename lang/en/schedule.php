@@ -14,6 +14,7 @@ return [
     'success_deleting' => 'Successfully archived schedule!',
     'success_editing' => 'Successfully edited schedule!',
     'success_restoring' => 'Successfully restored schedule!',
+    
     'error_creating' => 'Error creating new schedule!',
     'error_deleting' => 'Error archiving schedule!',
     'error_editing' => 'Error editing schedule!',
