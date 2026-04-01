@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Employee;
+use App\Models\EmployeeWorkSchedule;
 use App\Enums\EmploymentType;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -16,6 +17,20 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         Employee::factory()
+            ->has(
+                EmployeeWorkSchedule::factory()
+                ->state(new Sequence(
+                    [
+                    'employee_id' => 1,
+                    'work_schedule_id' => 1,
+                    'user_id' => 1,
+                    ],
+                    [
+                    'employee_id' => 2,
+                    'work_schedule_id' => 1,
+                    'user_id' => 1,
+                    ],
+            )))
             ->count(2)
             ->state(new Sequence(
                 [

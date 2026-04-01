@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Models\Attendance;
+use App\Observers\AttendanceObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Attendance::observe(AttendanceObserver::class);
+        
         View::composer('layouts.app', function ($view) {
             $route = Route::currentRouteName();
             $title = match(true) {

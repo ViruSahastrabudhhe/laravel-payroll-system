@@ -35,10 +35,10 @@ class DatabaseSeeder extends Seeder
             LeaveTypeSeeder::class,
             PositionSeeder::class,
             DepartmentSeeder::class,
+            WorkScheduleSeeder::class,
             EmployeeSeeder::class,
             EmployeeLeaveBalanceSeeder::class,
             DeductionSeeder::class,
-            WorkScheduleSeeder::class,
         ]);
     }
 }

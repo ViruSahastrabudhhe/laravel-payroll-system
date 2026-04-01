@@ -11,22 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('employee_work_schedules', function (Blueprint $table) {
             $table->id();
-            $table->time('time_in');
-            $table->time('time_out');
-            $table->time('break_start');
-            $table->time('break_end');
-            $table->time('overtime_in');
-            $table->time('overtime_out');
-            $table->date('date');
-            $table->integer('total_minutes')->default(0);
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('work_schedule_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->softDeletes();
             $table->foreign('employee_id')
                     ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->foreign('work_schedule_id')
+                    ->references('id')->on('work_schedules')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->foreign('user_id')
@@ -41,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('employee_work_schedules');
     }
 };

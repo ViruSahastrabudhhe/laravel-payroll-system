@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Models\Employee;
+use App\Models\EmployeeAttendance;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class Attendance extends Model
 {
@@ -21,8 +23,8 @@ class Attendance extends Model
         'date',
         'time_in',
         'time_out',
-        'pm_in',
-        'pm_out',
+        'break_start',
+        'break_end',
         'overtime_in',
         'overtime_out',
         'employee_id',

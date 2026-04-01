@@ -8,6 +8,7 @@
 <div>
     <form action="{{ route('employees.store') }}" method='post'>
         @csrf
+        <h3>Biographical Information</h3>
         First name: <input type="text" name="first_name" required> <br>
         Last name: <input type="text" name="last_name" required> <br>
         Gender: <select name="gender" id="gender" required>
@@ -25,6 +26,8 @@
         City: <input type="text" name="address[city]" required> <br>
         Province: <input type="text" name="address[province]" required> <br>
         Contact number: <input type="text" name="phone_number" required> <br>
+        
+        <h3>Employment Information</h3>
         Position: <select name="position_id" id="position" required>
                 <option value="">Select position</option>
             @foreach($positions as $position)
@@ -49,7 +52,16 @@
         </select> <br>
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <input type="hidden" name="address[user_id]" value="{{ auth()->user()->id }}">
-        <input type="submit" value="Create Employee">
+        
+        <h3>Work Schedule Information</h3>
+        Work Schedule: <select name="work_schedule_id" id="work_schedule_id" required>
+            <option value="">Select work schedule</option>
+            @foreach($workSchedules as $schedule)
+            <option value="{{ $schedule->id }}">{{ $schedule->name }}</option>
+            @endforeach 
+        </select> <br>
+        
+        <input type="submit" value="{{ __('employee.create') }}">
     </form>
 </div>
 @endsection

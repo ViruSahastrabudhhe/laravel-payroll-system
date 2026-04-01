@@ -9,6 +9,7 @@
     <form action="{{ route('employees.update', $employee) }}" method='post'>
         @csrf
         @method('put')
+        <h3>Biographical Information</h3>
         First name: <input type="text" name="first_name" required value="{{ $employee->first_name }}"> <br>
         Last name: <input type="text" name="last_name" required value="{{ $employee->last_name }}"> <br>
         Gender: <input type="text" name="gender" required value="{{ $employee->gender }}"> <br>
@@ -20,6 +21,8 @@
         City: <input type="text" name="address[city]" required value="{{ $employee->address->city }}"> <br>
         Province: <input type="text" name="address[province]" required value="{{ $employee->address->province }}"> <br>
         Contact number: <input type="text" name="phone_number" required value="{{ $employee->phone_number }}"> <br>
+        
+        <h3>Employment Information</h3>
         Position: <select name="position_id" id="position" required value="{{ $employee->position_id }}">
                 <option value="">Select position</option>
                 <option value="{{ $employee->position_id }}" selected>{{ $employee->position->title }}</option>
@@ -37,6 +40,7 @@
             @endforeach
         </select> <br>
         Employment Type: <select name="employment_type" id="employment_type" required>
+            <option value="">Select Employement Type</option>
             <option value="{{ $employee->employment_type }}" selected>{{ $employee->employment_type }}</option>
             <option value="" disabled>-----</option>
             @foreach($employmentTypes as $type)
@@ -47,6 +51,17 @@
             <option value="1" default>Active</option>
             <option value="0">Inactive</option>
         </select> <br>
+
+        <h3>Work Schedule Information</h3>
+        Work Schedule: <select name="work_schedule_id" id="work_schedule_id" required>
+            <option value="">Select Work Schedule</option>
+            <option value="{{ $employee->employeeWorkSchedule->workSchedule->name }}" selected>{{ $employee->employeeWorkSchedule->workSchedule->name }}</option>
+            <option value="" disabled>-----</option>
+            @foreach($workSchedules as $schedule)
+            <option value="{{ $schedule->id }}">{{ $schedule->name }}</option>
+            @endforeach 
+        </select> <br>
+
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <input type="hidden" name="address[user_id]" value="{{ auth()->user()->id }}">
         <input type="submit" value="Edit Employee">

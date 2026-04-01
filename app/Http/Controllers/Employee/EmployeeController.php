@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Address;
 use App\Models\Department;
+use App\Models\WorkSchedule;
 use App\Models\EmployeeLeaveBalance;
 use App\Enums\EmploymentType;
 use App\Http\Requests\Employee\StoreEmployeeRequest;
@@ -32,8 +33,9 @@ class EmployeeController extends Controller
         $positions = Position::findAllWithUserID()->get();
         $departments = Department::findAllWithUserID()->get();
         $employmentTypes = EmploymentType::cases();
+        $workSchedules = WorkSchedule::findAllWithUserID()->get();
 
-        return view('employee.create', ['positions' => $positions, 'departments' => $departments, 'employmentTypes' => $employmentTypes]);
+        return view('employee.create', ['positions' => $positions, 'departments' => $departments, 'workSchedules' => $workSchedules, 'employmentTypes' => $employmentTypes]);
     }
 
     /**
@@ -43,7 +45,7 @@ class EmployeeController extends Controller
     {
         $data = $request->validated();
 
-        // creates address, employee, and employee leave balance at once
+        // creates address, employee, emp work schedule, and emp leave balance at once
         $address = Address::create($data['address']);
 
         $employee = Employee::create([
@@ -67,6 +69,10 @@ class EmployeeController extends Controller
         $employeeLeaveBalance->user_id = auth()->user()->id;
         $employeeLeaveBalance->save();
 
+        $employeeWorkSchedule = new EmployeeWorkSchedule;
+        $employeeWorkSchedule->employee_id = $employee->id;
+        $employeeWorkSchedule->work_schedule_id = $data['work_schedule_id'];
+
         return redirect()->route('employees.index')->with('success', __('employee.success_creating'));
     }
 
@@ -85,6 +91,7 @@ class EmployeeController extends Controller
     {
         $positions = Position::findAllWithUserID()->get();
         $departments = Department::findAllWithUserID()->get();
+        $workSchedules = WorkSchedule::findAllWithUserID()->get();
         $employmentTypes = EmploymentType::cases();
 
         return view('employee.edit', 
@@ -92,6 +99,7 @@ class EmployeeController extends Controller
                 'employee' => $employee,
                 'positions' => $positions,
                 'departments' => $departments,
+                'workSchedules' => $workSchedules,
                 'employmentTypes' => $employmentTypes,
             ]
         );

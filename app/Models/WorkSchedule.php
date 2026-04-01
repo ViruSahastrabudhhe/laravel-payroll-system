@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\Scope;
+use App\Models\EmployeeWorkSchedule;
 
 class WorkSchedule extends Model
 {
@@ -28,6 +29,14 @@ class WorkSchedule extends Model
     protected $casts = [
         'work_days' => 'array',
     ];
+
+    public function workSchedule() {
+        return $this->hasOne(EmployeeWorkSchedule::class);
+    }
+
+    public function employeeAttendance() {
+        return $this->hasMany(EmployeeAttendance::class, 'work_schedule_id', 'id');
+    }
 
     #[Scope]
     protected function findAllWithUserID(Builder $query): void {

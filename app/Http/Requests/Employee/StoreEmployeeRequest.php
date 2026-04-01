@@ -38,6 +38,7 @@ class StoreEmployeeRequest extends FormRequest
             'is_active' => 'required',
             'position_id' => 'required',
             'department_id' => 'required',
+            'work_schedule_id' => 'required',
             'user_id' => 'required',
         ];
     }

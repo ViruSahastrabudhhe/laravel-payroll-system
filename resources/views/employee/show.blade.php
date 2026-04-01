@@ -31,6 +31,7 @@
     </ul>
 
     <p>Leave Balance: {{ $employee->leaveBalance->leave_balance }}</p>
+    <p>Work Schedule: {{ $employee->employeeWorkSchedule->workSchedule->name}}</p>
 
     <h3>Deductions</h3>
     <table>

@@ -3,10 +3,10 @@
 return [
     'title' => 'Employee Attendances',
 
-    'sidebar' => 'Employee Attendances List',
+    'sidebar' => 'Employee Attendances Summary',
 
     'create' => 'Create Employee Attendance',
-    'back' => 'Back to Employee Attendances List',
+    'back' => 'Back to Employee Attendances Summary',
     'archive' => 'Employee Attendance Archives',
     'edit' => 'Edit Attendance',
 
