@@ -45,7 +45,7 @@
             <tr>
                 <td>
                     <ul>
-                        @forelse($employee->deductions as $deduction)
+                        @forelse($employee->employeeDeduction as $deduction)
                             <li>{{ $deduction->deduction->name }}: P{{ $deduction->amount }} 
                                 <a
                                     onclick="event.preventDefault(); document.getElementById('delete-form-{{ $deduction->id }}').submit();">
@@ -62,7 +62,7 @@
                         @endforelse
                     </ul>
                 </td>
-                <td>P{{ $employee->deductions->sum('amount') }}</td>
+                <td>P{{ $employee->employeeDeduction->sum('amount') }}</td>
             </tr>
         </tbody>
     </table>

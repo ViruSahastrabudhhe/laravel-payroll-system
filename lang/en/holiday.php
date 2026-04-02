@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'title' => 'Holiday',
+    'title' => 'Holidays',
 
-    'sidebar' => 'Holiday List',
+    'sidebar' => 'Holidays List',
 
-    'create' => 'Create Holiday Type',
-    'back' => 'Back to Holiday Types List',
-    'archive' => 'Holiday Type Archives',
-    'edit' => 'Edit Holiday Type',
+    'create' => 'Create Holiday',
+    'back' => 'Back to Holidays List',
+    'archive' => 'Holiday Archives',
+    'edit' => 'Edit Holiday',
 
     'success_creating' => 'Successfully created new holiday!',
     'success_deleting' => 'Successfully archived holiday!',

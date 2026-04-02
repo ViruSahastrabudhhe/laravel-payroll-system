@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Employee;
 use App\Models\EmployeeWorkSchedule;
+use App\Models\EmployeeDeduction;
 use App\Enums\EmploymentType;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -30,8 +31,8 @@ class EmployeeSeeder extends Seeder
                     'work_schedule_id' => 1,
                     'user_id' => 1,
                     ],
-            )))
-            ->count(2)
+                ))
+            )
             ->state(new Sequence(
                 [
                 'first_name' => 'John',
@@ -61,8 +62,50 @@ class EmployeeSeeder extends Seeder
                 'department_id' => 3,
                 'user_id' => 1,
                 ],
-
             ))
+            ->count(2)
+            ->has(
+                EmployeeDeduction::factory()
+                ->state(new Sequence(
+                    [
+                        'employee_id' => 1,
+                        'deduction_id' => 1,
+                        'amount' => 0,
+                        'user_id' => 1,
+                    ],
+                    [
+                        'employee_id' => 1,
+                        'deduction_id' => 2,
+                        'amount' => 0,
+                        'user_id' => 1,
+                    ],
+                    [
+                        'employee_id' => 1,
+                        'deduction_id' => 3,
+                        'amount' => 0,
+                        'user_id' => 1,
+                    ],
+                    [
+                        'employee_id' => 2,
+                        'deduction_id' => 1,
+                        'amount' => 0,
+                        'user_id' => 1,
+                    ],
+                    [
+                        'employee_id' => 2,
+                        'deduction_id' => 2,
+                        'amount' => 0,
+                        'user_id' => 1,
+                    ],
+                    [
+                        'employee_id' => 2,
+                        'deduction_id' => 3,
+                        'amount' => 0,
+                        'user_id' => 1,
+                    ],
+                ))
+                ->count(3)
+            )
             ->create();
     }
 }

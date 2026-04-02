@@ -29,21 +29,21 @@
                     <ul>
                         <li><a href="{{ route('work_schedules.index') }}">{{ __('schedule.sidebar') }}</a></li>
                         <li><a href="{{ route('attendances.index') }}">{{ __('attendance.sidebar') }}</a></li>
-                        <li><a href="#">{{ __('employee_attendance.sidebar') }}</a></li>
+                        <!-- <li><a href="#">{{ __('employee_attendance.sidebar') }}</a></li> -->
                     </ul>
                 </li>
                 <li>{{ __('common.app_leave') }}
                     <ul>
                         <li><a href="{{ route('employee_leaves.index') }}">{{ __('employee_leave.sidebar') }}</a></li>
                         <li><a href="{{ route('leave_types.index') }}">{{ __('leave_type.sidebar') }}</a></li>
-                        <li><a href="{{ route('holidays.index') }}">Holidays</a></li>
+                        <li><a href="{{ route('holidays.index') }}">{{ __('holiday.sidebar')}}</a></li>
                     </ul>
                 </li>
                 <li>{{ __('common.app_deduction') }}
                     <ul>
+                        <li><a href="{{ route('employee_deductions.index') }}">{{ __('employee_deduction.sidebar') }}</a></li>
                         <li><a href="{{ route('deductions.index') }}">{{ __('deduction.sidebar') }}</a></li>
                         <li><a href="{{ route('deductions.create') }}">{{ __('deduction.create') }}</a></li>
-                        <li><a href="{{ route('employee_deductions.index') }}">{{ __('employee_deduction.sidebar') }}</a></li>
                     </ul>
                 </li>
                 <li>{{ __('common.app_payroll') }}

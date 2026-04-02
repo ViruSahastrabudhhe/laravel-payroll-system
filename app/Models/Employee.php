@@ -12,6 +12,7 @@ use App\Models\EmployeeLeaveBalance;
 use App\Models\EmployeeWorkSchedule;
 use Carbon\Carbon;
 use App\Enums\EmploymentType;
+use App\Enums\DeductionType;
 use App\Models\Scopes\EmployeeScope;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -60,7 +61,7 @@ class Employee extends Model
         return $this->hasOne(EmployeeAttendance::class);
     }
 
-    public function deductions() {
+    public function employeeDeduction() {
         return $this->hasMany(EmployeeDeduction::class);
     }
 
@@ -89,7 +90,9 @@ class Employee extends Model
             ->join('employees', 'attendances.employee_id', '=', 'employees.id')
             ->where('attendances.user_id', '=', auth()->user()->id)
             ->where('attendances.employee_id', '=', $this->id)
-            ->whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+            ->whereDate('date', '>=', Carbon::now()->startOfMonth())
+            ->whereDate('date', '<=', Carbon::now()->endOfMonth())            
+            ->whereNull('attendances.deleted_at')
             ->sum('attendances.total_minutes');
 
         return round($total_minutes / 60, 2);
@@ -100,7 +103,9 @@ class Employee extends Model
             ->join('employees', 'attendances.employee_id', '=', 'employees.id')
             ->where('attendances.user_id', '=', auth()->user()->id)
             ->where('attendances.employee_id', '=', $this->id)
-            ->whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+            ->whereDate('date', '>=', Carbon::now()->startOfMonth())
+            ->whereDate('date', '<=', Carbon::now()->endOfMonth())
+            ->whereNull('attendances.deleted_at')
             ->count();
 
         return $entries;
@@ -111,7 +116,9 @@ class Employee extends Model
             ->join('employees', 'attendances.employee_id', '=', 'employees.id')
             ->where('attendances.user_id', '=', auth()->user()->id)
             ->where('attendances.employee_id', '=', $this->id)
-            ->whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+            ->whereDate('date', '>=', Carbon::now()->startOfMonth())
+            ->whereDate('date', '<=', Carbon::now()->endOfMonth())
+            ->whereNull('attendances.deleted_at')
             ->sum('overtime_minutes');
 
         return round($overtime_minutes / 60, 2);
@@ -134,7 +141,7 @@ class Employee extends Model
             return $monthlySalary + $overtime;
         }
         
-        return $this->position->salary_amount + $overtime;
+        return round(($this->position->salary_amount + $overtime), 2);
     }
 
     public function overtimePay() {
@@ -152,14 +159,16 @@ class Employee extends Model
             return 0;
         }
 
-        $gsis = DB::table('deductions')
-            ->where('user_id', '=', auth()->user()->id)
-            ->where('name', '=', 'GSIS Contribution')
-            ->pluck('rate');
+        $gsis = DB::table('employee_deductions')
+            ->join('deductions', 'employee_deductions.deduction_id', '=', 'deductions.id')
+            ->where('employee_deductions.user_id', '=', auth()->user()->id)
+            ->where('employee_deductions.employee_id', '=', $this->id)
+            ->where('deductions.id', '=', 1)
+            ->first();
 
-        $calc = $this->position->salary_amount * $gsis[0];
+        $calc = $this->position->salary_amount * $gsis->rate;
 
-        return $calc;
+        return round($calc, 2);
     }
 
     public function philHealthContribution(): float {
@@ -167,18 +176,20 @@ class Employee extends Model
             return 0;
         }
         
-        $philhealth = DB::table('deductions')
-            ->where('user_id', '=', auth()->user()->id)
-            ->where('name', '=', 'PhilHealth Personal Share Contribution')
-            ->pluck('rate');
+        $philHealth = DB::table('employee_deductions')
+            ->join('deductions', 'employee_deductions.deduction_id', '=', 'deductions.id')
+            ->where('employee_deductions.user_id', '=', auth()->user()->id)
+            ->where('employee_deductions.employee_id', '=', $this->id)
+            ->where('deductions.id', '=', 2)
+            ->first();
 
-        $calc = $this->position->salary_amount * $philhealth[0];
+        $calc = $this->position->salary_amount * $philHealth->rate;
 
         if ($calc >= 2500) {
             $calc = 2500;
         }
 
-        return $calc;
+        return round($calc, 2);
     }
 
     public function pagIbigContribution(): float {
@@ -186,33 +197,33 @@ class Employee extends Model
             return 0;
         }
 
-        $pagibig = DB::table('deductions')
-            ->where('user_id', '=', auth()->user()->id)
-            ->where('name', '=', 'Pag-Ibig Personal Share Contribution')
-            ->pluck('rate');
-
         if ($this->position->salary_amount > 1500) {
             return 200;
         } else {
             return 100;
         }
-    }
+        }
 
-    public function otherDeductions(): float {
+    public function optionalDeductions(): float {
         if (!$this->isRegular()) {
             return 0;
         }
 
-        $otherDeductions = $this->deductions->sum('amount');
+        $optionalDeductions = DB::table('employee_deductions')
+            ->join('deductions', 'employee_deductions.deduction_id', '=', 'deductions.id')
+            ->where('employee_deductions.user_id', '=', auth()->user()->id)
+            ->where('employee_deductions.employee_id', '=', $this->id)
+            ->where('deductions.type', '=', DeductionType::Optional->value)
+            ->get();
 
-        return $otherDeductions;
+        return round($optionalDeductions->sum('amount'), 2);
     }
 
     public function netTaxableIncome() {
         $grossPay = $this->grossPay();
         $contributions = $this->gsisContribution() + $this->philHealthContribution() + $this->pagIbigContribution();
 
-        return $grossPay - $contributions;
+        return round(($grossPay - $contributions), 2);
     }
 
     public function withholdingTax() {
@@ -252,11 +263,11 @@ class Employee extends Model
         $philHealth = $this->philHealthContribution();
         $pagibig = $this->pagIbigContribution();
         $withholdingTax = $this->withholdingTax();
-        $otherDeductions = $this->otherDeductions();
+        $otherDeductions = $this->optionalDeductions();
 
         $total = $gsis + $philHealth + $pagibig + $withholdingTax + $otherDeductions;
 
-        return $total;
+        return round($total, 2);
     }
 
     public function netPay() {
@@ -265,7 +276,7 @@ class Employee extends Model
 
         $sum = $grossPay - $totalDeductions;
 
-        return $sum;
+        return round($sum, 2);
     }
 
     #[Scope]

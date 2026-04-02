@@ -119,7 +119,7 @@ class AttendanceObserver
         if ($attendance->attendance_status==AttendanceStatus::Late->value) {
             $leaveBalance->leave_balance -= 0.5;
             $leaveBalance->save();
-            } elseif ($attendance->attendance_status==AttendanceStatus::Absent->value) {
+        } elseif ($attendance->attendance_status==AttendanceStatus::Absent->value) {
             $leaveBalance->leave_balance -= 1;
             $leaveBalance->save();
         }

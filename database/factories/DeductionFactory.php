@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Enums\DeductionType;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Deduction>
@@ -18,6 +19,7 @@ class DeductionFactory extends Factory
     {
         return [
             'name' => 'GSIS Contribution',
+            'type' => DeductionType::Optional->value,
             'description' => '',
             'user_id' => 1,
         ];

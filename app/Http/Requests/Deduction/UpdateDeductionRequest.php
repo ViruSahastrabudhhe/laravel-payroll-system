@@ -24,6 +24,7 @@ class UpdateDeductionRequest extends FormRequest
         return [
             'name' => 'required',
             'rate' => 'nullable|numeric',
+            'type' => 'required',
             'description' => 'nullable',
             'user_id' => 'required',
         ];

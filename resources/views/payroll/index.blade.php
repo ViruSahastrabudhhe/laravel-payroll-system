@@ -32,7 +32,7 @@
                 <th>GSIS Contribution</th>
                 <th>PhilHealth Contribution</th>
                 <th>Pag-Ibig Contribution</th>
-                <th>Other Deductions</th>
+                <th>Optional Deductions</th>
                 <th>Withholding Tax</th>
                 <th>Cash Advance</th>
                 <th>Adjustment</th>
@@ -47,39 +47,21 @@
                 <td>{{ $employee->id }}</td>
                 <td>{{ $employee->first_name }} {{ $employee->last_name }}</td>
                 <td>{{ $employee->totalHoursWorked() }}</td>
-                <td>P{{ round($employee->grossPay(), 2) }}</td>
-                <td>P{{ round($employee->netTaxableIncome(), 2) }}</td>
+                <td>P{{ $employee->grossPay() }}</td>
+                <td>P{{ $employee->netTaxableIncome() }}</td>
+                <td>P{{ $employee->gsisContribution()}}</td>
+                <td>P{{ $employee->philHealthContribution() }}</td>
+                <td>P{{ $employee->pagIbigContribution() }}</td>
                 <td>
-                    @if ($employee->isRegular())
-                    P{{ round($employee->gsisContribution(), 2) }}
-                    @else
-                    -
-                    @endif
-                </td>
-                <td>
-                    @if ($employee->isRegular())
-                    P{{ round($employee->philHealthContribution(), 2) }}
-                    @else
-                    -
-                    @endif
-                </td>
-                <td>
-                    @if ($employee->isRegular())
-                    P{{ $employee->pagIbigContribution() }}
-                    @else
-                    -
-                    @endif
-                </td>
-                <td>
-                    P{{ $employee->deductions->sum('amount') }}
+                    P{{ $employee->optionalDeductions() }}
                     <br>
                     <a href="{{ route('employee_deductions.index') }}">View deductions</a>
                 </td>
                 <td>P{{ round($employee->withholdingTax(), 2) }}</td>
                 <td>-</td>
                 <td>-</td>
-                <td>P{{ round($employee->totalDeductions(), 2) }}</td>
-                <td>P{{ round($employee->netPay(), 2) }}</td>
+                <td>P{{ $employee->totalDeductions() }}</td>
+                <td>P{{ $employee->netPay() }}</td>
             </tr>
             @empty
             <p>No employees on payroll</p>

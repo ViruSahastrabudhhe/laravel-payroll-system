@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Deduction;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EmployeeDeduction>
@@ -17,9 +18,21 @@ class EmployeeDeductionFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'deduction_id' => 15,
-            // 'amount' => 100,
-            // 'user_id' => 1,
+            'employee_id' => 1,
+            'deduction_id' => 1,
+            'amount' => 100,
+            'user_id' => 1,
         ];
+    }
+
+    public function configure(): static {
+        return $this->afterCreating(function ($employeeDeduction) {
+            $deduction = Deduction::find($employeeDeduction->deduction_id);
+            $salary = $employeeDeduction->employee->position->salary_amount;
+
+            $employeeDeduction->update([
+                'amount' => $salary * ($deduction->rate ?? 0),
+            ]);
+        });
     }
 }

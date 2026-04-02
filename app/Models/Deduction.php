@@ -17,6 +17,7 @@ class Deduction extends Model
     protected $fillable = [
         'name',
         'rate',
+        'type',
         'description',
         'user_id',
     ];

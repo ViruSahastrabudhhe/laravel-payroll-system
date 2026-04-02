@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Deduction;
 
 use App\Models\Deduction;
+use App\Enums\DeductionType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Deduction\StoreDeductionRequest;
 use App\Http\Requests\Deduction\UpdateDeductionRequest;
@@ -24,7 +25,8 @@ class DeductionController extends Controller
      */
     public function create()
     {
-        return view('deduction.create');
+        $deductionType = DeductionType::cases();
+        return view('deduction.create', ['deductionType' => $deductionType]);
     }
 
     /**
@@ -52,7 +54,8 @@ class DeductionController extends Controller
      */
     public function edit(Deduction $deduction)
     {
-        return view('deduction.edit', ['deduction' => $deduction]);
+        $deductionType = DeductionType::cases();
+        return view('deduction.edit', ['deduction' => $deduction, 'deductionType' => $deductionType]);
     }
 
     /**

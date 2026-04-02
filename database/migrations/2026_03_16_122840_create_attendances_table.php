@@ -21,7 +21,7 @@ return new class extends Migration
             $table->time('overtime_in');
             $table->time('overtime_out');
             $table->date('date');
-            $table->enum('attendance_status', AttendanceStatus::cases());
+            $table->enum('attendance_status', AttendanceStatus::cases())->default(AttendanceStatus::Absent->value);
             $table->integer('total_minutes')->default(0);
             $table->integer('overtime_minutes')->default(0);
             $table->unsignedBigInteger('employee_id');
